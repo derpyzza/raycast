@@ -7,9 +7,14 @@ void MovePlayer();
 
 float playerx;
 float playery;
-float playerSpeed = 5;
-float playerAngle;
-float rayY, rayX, yOffset, xOffset;
+float playerSpeed;
+float direction;
+
+struct Ray
+{
+    int a;
+};
+struct Ray things[10];
 
 int main(void)
 {
@@ -17,6 +22,8 @@ int main(void)
     const int screenWidth = 512;
     const int screenHeight = 512;
     playerx = 300, playery = 300;
+    direction = 0;
+    playerSpeed = 5;
 
     InitWindow(screenWidth, screenHeight, "RayCaster");
 
@@ -29,12 +36,21 @@ int main(void)
         // TODO: Update your variables here
         MovePlayer();
 
+        for (int i = 0; i < 10; i++)
+        {
+            /* code */
+            things[i].a = i;
+            printf("%i \n", things[i].a);
+        }
+        
+
         // Draw
         BeginDrawing();
 
         ClearBackground(GRAY);
         DrawMap(mapHeight, mapWidth, cellSize);
         DrawRectangle(playerx, playery, 5, 5, YELLOW);
+        
 
         EndDrawing();
     }

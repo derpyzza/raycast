@@ -1,5 +1,14 @@
-----PLAYER:
---Position
---Direction
---fov??
---
+PLAYER{
+    Position
+    Direction
+    fov
+    MovePlayer();
+}
+
+
+RAY{
+    Position
+    Direction
+    DrawRays();
+    store rays in a struct
+}
