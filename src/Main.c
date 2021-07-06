@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include <stdio.h>
 #include <math.h>
-#include "map.h"
+// #include "map.h"
 
 void MovePlayer();
 void CastRay();
@@ -33,7 +33,7 @@ int main(void)
     playery = 300;
     direction = 0;
     playerSpeed = 5;
-    ray Test = {playerx, playery, {1, 1}};
+    ray Test = {playerx, playery, (1, 1)};
 
     InitWindow(screenWidth, screenHeight, "RayCaster");
 
@@ -44,11 +44,10 @@ int main(void)
     {
         // Update
         // TODO: Update your variables here
-        // CastRay();
         MovePlayer();
-        
-        float ra = Vec2Rad(Test.Dir);
-        printf("X: %f, Y: %f, Angle: %f \n", Test.Dir.x, Test.Dir.y, ra);
+        CastRay();
+        printf("%f X: \n", Test.Dir.x);
+        printf("%f Y: \n", Test.Dir.y);
 
         // Draw
         BeginDrawing();
@@ -86,17 +85,17 @@ void MovePlayer()
     }
 }
 
-// void CastRay()
-// {
-//     int dof;
-//     Vec2Rad(Test.Dir);
-//     int mx, my, mp;
-//     //horizontal line variables
-//     float RayX, RayY, nextX, nextY;
+void CastRay()
+{
+    int dof;
+    float ra = Vec2Rad(Test.Dir);
+    int mx, my, mp;
+    //horizontal line variables
+    float RayX, RayY, nextX, nextY;
     
-//     printf("%f RAY:\n", Test.Dir);
+    printf("%f RAY:\n", ra);
 
-// }
+}
 
 float Vec2Rad(Vector2 v)
 {
