@@ -11,4 +11,8 @@ RAY{
     Direction
     DrawRays();
     store rays in a struct
+    --Find the x and y coordinates of the nearest horizontal line and the x offset and y offset;
+    --Find the x and y coordinates of the nearest Vertical line and the x offset and y offset;
+    --Find the shortest of the two;
+    --Draw the shortest;
 }

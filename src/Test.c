@@ -1,23 +1,29 @@
 #include <stdio.h>
+#include <math.h>
 
-struct Test
+
+
+typedef struct Vector2
 {
-    /* data */
-    int a;
-};
-int count;
+    float x;
+    float y;
+}Vector2;
 
-struct Test array[10];
+float Vec2Rad(Vector2 v);
 
 int main (void){
+    Vector2 angle = {-1, 1};
 
-    for (int i = 0; i < 10; i++)
-    {
-        /* code */
-        array[i].a = count;
-        count++;
-        printf("%i \n", array[i].a);
-    }
-    
+    float a = Vec2Rad(angle);
 
+    printf("%f \n", a);
+}
+
+float Vec2Rad(Vector2 v)
+{
+    //tan(angle) = vy/vx
+    //angle = atan(vy/vx)
+    float angle = atan(v.y / v.x);
+
+    return angle;
 }

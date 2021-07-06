@@ -34,7 +34,7 @@ void DrawMap(int width, int height, int size)
         {
             if (map[y][x] == 1)
             {
-                DrawRectangle(x * size, y * size, size - cc, size - cc, GREEN);
+                DrawRectangle(x * size, y * size, size - cc, size - cc, WHITE);
             }
             else if (map[y][x] == 0)
             {

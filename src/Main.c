@@ -4,26 +4,36 @@
 #include "map.h"
 
 void MovePlayer();
+void CastRay();
+float Vec2Rad(Vector2 v);
 
 float playerx;
 float playery;
 float playerSpeed;
 float direction;
+int FOV;
 
-struct Ray
+float nhx, nhy, hxo, hyo;
+
+typedef struct ray
 {
-    int a;
-};
-struct Ray things[10];
+    float rayx;
+    float rayy;
+    Vector2 Dir;
+} ray;
+
+ray Test;
 
 int main(void)
 {
     // Initialization
-    const int screenWidth = 512;
+    const int screenWidth = 1024;
     const int screenHeight = 512;
-    playerx = 300, playery = 300;
+    playerx = 300;
+    playery = 300;
     direction = 0;
     playerSpeed = 5;
+    ray Test = {playerx, playery, 1, 1};
 
     InitWindow(screenWidth, screenHeight, "RayCaster");
 
@@ -35,14 +45,9 @@ int main(void)
         // Update
         // TODO: Update your variables here
         MovePlayer();
-
-        for (int i = 0; i < 10; i++)
-        {
-            /* code */
-            things[i].a = i;
-            printf("%i \n", things[i].a);
-        }
-        
+        CastRay();
+        printf("%f X: \n", Test.Dir.x);
+        printf("%f Y: \n", Test.Dir.y);
 
         // Draw
         BeginDrawing();
@@ -50,8 +55,7 @@ int main(void)
         ClearBackground(GRAY);
         DrawMap(mapHeight, mapWidth, cellSize);
         DrawRectangle(playerx, playery, 5, 5, YELLOW);
-        
-
+        DrawLine(playerx, playery, playerx + (Test.Dir.x * 10), playery + (Test.Dir.y * 10), RED);
         EndDrawing();
     }
 
@@ -79,4 +83,22 @@ void MovePlayer()
     {
         playerx += playerSpeed;
     }
+}
+
+void CastRay()
+{
+    int dof;
+    float ra = Vec2Rad(Test.Dir);
+    int mx, my, mp;
+    //horizontal line variables
+    float RayX, RayY, nextX, nextY;
+    
+    printf("%f RAY:\n", ra);
+
+}
+
+float Vec2Rad(Vector2 v)
+{
+    float angle = atan2(v.y, v.x);
+    return angle;
 }
