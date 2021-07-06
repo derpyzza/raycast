@@ -1,5 +1,4 @@
 #include "../include/raylib.h"
-#include <math.h>
 #include "map.h"
 
 

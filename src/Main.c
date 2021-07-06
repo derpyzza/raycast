@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include <stdio.h>
 #include <math.h>
-#include "map.h"
+// #include "map.h"
 
 void MovePlayer();
 void CastRay();
@@ -33,7 +33,7 @@ int main(void)
     playery = 300;
     direction = 0;
     playerSpeed = 5;
-    ray Test = {playerx, playery, 1, 1};
+    ray Test = {playerx, playery, (1, 1)};
 
     InitWindow(screenWidth, screenHeight, "RayCaster");
 
@@ -53,7 +53,7 @@ int main(void)
         BeginDrawing();
 
         ClearBackground(GRAY);
-        DrawMap(mapHeight, mapWidth, cellSize);
+        // DrawMap(mapHeight, mapWidth, cellSize);
         DrawRectangle(playerx, playery, 5, 5, YELLOW);
         DrawLine(playerx, playery, playerx + (Test.Dir.x * 10), playery + (Test.Dir.y * 10), RED);
         EndDrawing();
