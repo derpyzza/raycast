@@ -1,9 +1,11 @@
 #include "raylib.h"
 #include <stdio.h>
 #include <math.h>
-// #include "map.h"
+#include "map.h"
 
+//Prototypes;
 void MovePlayer();
+void DrawRay2D(Ray r, float rx, float ry);
 void CastRay();
 float Vec2Rad(Vector2 v);
 
@@ -13,16 +15,12 @@ float playerSpeed;
 float direction;
 int FOV;
 
-float nhx, nhy, hxo, hyo;
-
 typedef struct ray
 {
     float rayx;
     float rayy;
     Vector2 Dir;
 } ray;
-
-ray Test;
 
 int main(void)
 {
@@ -33,7 +31,6 @@ int main(void)
     playery = 300;
     direction = 0;
     playerSpeed = 5;
-    ray Test = {playerx, playery, (1, 1)};
 
     InitWindow(screenWidth, screenHeight, "RayCaster");
 
@@ -42,25 +39,18 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())
     {
-        // Update
-        // TODO: Update your variables here
         MovePlayer();
-        CastRay();
-        printf("%f X: \n", Test.Dir.x);
-        printf("%f Y: \n", Test.Dir.y);
 
-        // Draw
         BeginDrawing();
 
         ClearBackground(GRAY);
-        // DrawMap(mapHeight, mapWidth, cellSize);
+        DrawMap(mapHeight, mapWidth, cellSize);
         DrawRectangle(playerx, playery, 5, 5, YELLOW);
-        DrawLine(playerx, playery, playerx + (Test.Dir.x * 10), playery + (Test.Dir.y * 10), RED);
+        CastRay();
+
         EndDrawing();
     }
-
-    // De-Initialization
-    CloseWindow(); // Close window and OpenGL context
+    CloseWindow();
 
     return 0;
 }
@@ -85,16 +75,52 @@ void MovePlayer()
     }
 }
 
+void DrawRay2D(ray r, float rx, float ry)
+{
+    DrawLine(playerx, playery, rx, ry, RED);
+}
+
 void CastRay()
 {
-    int dof;
+    ray Test = {
+        .rayx = playerx,
+        .rayy = playery,
+        .Dir = {-1, 1}
+    };
     float ra = Vec2Rad(Test.Dir);
-    int mx, my, mp;
-    //horizontal line variables
+    int dof, mx, my, mp;
     float RayX, RayY, nextX, nextY;
-    
-    printf("%f RAY:\n", ra);
 
+    //if the ray is looking up;
+    if (ra > PI)
+    {
+        RayY = (playery / cellSize) * (cellSize)-1;
+        RayX = playerx + (playery - RayY) / tan(ra);
+        nextY = -cellSize;
+        nextX = -cellSize / tan(ra);
+    }
+     if (ra < PI)
+    {
+        RayY = (playery / cellSize) * (cellSize) + 64;
+        RayX = playerx + (playery - RayY) / tan(ra);
+        nextY = cellSize;
+        nextX = -cellSize / tan(ra);
+    }
+    if (ra == 0 || ra == PI){
+        RayX = playerx; RayY = playery;
+        dof = 8;
+    }
+
+    while (dof < 8)
+    {
+        mx = (int) RayX / 64;
+        my = (int) RayY / 64;
+        mp = my * mapWidth + mx;
+        if(map[mp] == 1){
+            printf("hit");
+        }
+    }
+    DrawRay2D(Test, RayX, RayY);
 }
 
 float Vec2Rad(Vector2 v)

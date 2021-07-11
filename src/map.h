@@ -6,4 +6,4 @@ extern int cc;
 extern int mapWidth;
 extern int mapHeight;
 extern int cellSize;
-extern int map[][mapS];
+extern int map[];
