@@ -1,18 +1,15 @@
-PLAYER{
-    Position
-    Direction
-    fov
-    MovePlayer();
-}
 
+    ✔ void DrawMap();
+    ✔ void MovePlayer();
+    void DrawRay2D();
+    void CastRay2D();
 
-RAY{
-    Position
-    Direction
-    DrawRays();
-    store rays in a struct
-    --Find the x and y coordinates of the nearest horizontal line and the x offset and y offset;
-    --Find the x and y coordinates of the nearest Vertical line and the x offset and y offset;
-    --Find the shortest of the two;
-    --Draw the shortest;
-}
+    ✔ player x, player y, player direction(float)
+
+    ✔ map cell size, map width, map height
+
+    ✔ draw a line between the player, and the direction they're facing;
+
+    ray x, ray y, ray direction(float), ray X offset, ray Y offset;
+
+    draw dots at first intersection point to start off with
